@@ -106,6 +106,10 @@ Validates a password against a crypted copy (for example from your database).
         }
     }
 
+=head1 DEVELOPMENT AND REPOSITORY
+
+Clone it on GitHub at https://github.com/naturalist/Mojolicious--Plugin--Bcrypt
+
 =head1 SEE ALSO
 
 L<Crypt::Eksblowfish::Bcrypt>, L<Mojolicious>, L<Mojolicious::Plugin>
