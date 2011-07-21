@@ -3,7 +3,7 @@ package Mojolicious::Plugin::Bcrypt;
 use warnings;
 use strict;
 
-our $VERSION = '0.011';
+our $VERSION = '0.02';
 
 use Mojo::Base 'Mojolicious::Plugin';
 use Crypt::Eksblowfish::Bcrypt qw(bcrypt en_base64);
@@ -50,7 +50,7 @@ Mojolicious::Plugin::Bcrypt - bcrypt your passwords!
 
 =head1 VERSION
 
-Version 0.011
+Version 0.02
 
 =head1 SYNOPSIS
 
