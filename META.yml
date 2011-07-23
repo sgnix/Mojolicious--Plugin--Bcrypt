@@ -1,5 +1,5 @@
 ---
-abstract: 'bcrypt your passwords!'
+abstract: 'Mojolicious plugin for bcrypt'
 author:
   - 'minimalist <minimalist@lavabit.com>'
 build_requires:
@@ -25,4 +25,4 @@ requires:
 resources:
   repository: git://github.com/naturalist/Mojolicious--Plugin--Bcrypt.git
   bigtracker: https://github.com/naturalist/Mojolicious--Plugin--Bcrypt/issues
-version: 0.01
+version: 0.03
