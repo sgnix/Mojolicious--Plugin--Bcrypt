@@ -3,7 +3,7 @@ package Mojolicious::Plugin::Bcrypt;
 use warnings;
 use strict;
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 use Mojo::Base 'Mojolicious::Plugin';
 use Crypt::Eksblowfish::Bcrypt qw(bcrypt en_base64);
@@ -50,7 +50,7 @@ Mojolicious::Plugin::Bcrypt - bcrypt your passwords!
 
 =head1 VERSION
 
-Version 0.03
+Version 0.04
 
 =head1 SYNOPSIS
 
@@ -65,7 +65,7 @@ Provides a helper for crypting and validating passwords via bcrypt.
 
     ...
 
-Optional parameter C<cost> is a non-negative integer controlling the 
+Optional parameter C<cost> is a non-negative integer controlling the
 cost of the hash function. The number of operations is proportional to 2^cost.
 The current default value is 6.
 
@@ -73,7 +73,7 @@ The current default value is 6.
 
 =head2 bcrypt
 
-Crypts a password via the bcrypt algorithm. 
+Crypts a password via the bcrypt algorithm.
 
     $self->bcrypt( $password, $settings );
 
