@@ -7,6 +7,7 @@ our $VERSION = '0.04';
 
 use Mojo::Base 'Mojolicious::Plugin';
 use Crypt::Eksblowfish::Bcrypt qw(bcrypt en_base64);
+use Crypt::Random::Source qw(get_strong get_weak);
 
 sub register {
     my $self   = shift;
@@ -18,8 +19,11 @@ sub register {
             my $c = shift;
             my ( $password, $settings ) = @_;
             unless ( defined $settings && $settings =~ /^\$2a\$/ ) {
-                my $cost = sprintf('%02d', $config->{cost} || 6);
-                $settings = join( '$', '$2a', $cost, _salt() );
+                $settings = sprintf(
+                    '$2a$%02d$%s',
+                    $config->{cost} || 6,
+                    _salt($config->{strong})
+                );
             }
             return bcrypt( $password, $settings );
         }
@@ -35,9 +39,7 @@ sub register {
 }
 
 sub _salt {
-    my $num = 999999;
-    my $cr = crypt( rand($num), rand($num) ) . crypt( rand($num), rand($num) );
-    en_base64(substr( $cr, 4, 16 ));
+    return en_base64((shift) ? get_strong(16) : get_weak(16));
 }
 
 1;
@@ -60,7 +62,7 @@ Provides a helper for crypting and validating passwords via bcrypt.
 
     sub startup {
         my $self = shift;
-        $self->plugin('bcrypt', { cost => 4 });
+        $self->plugin('bcrypt', { cost => 4, strong => 0 });
     }
 
     ...
@@ -68,6 +70,9 @@ Provides a helper for crypting and validating passwords via bcrypt.
 Optional parameter C<cost> is a non-negative integer controlling the
 cost of the hash function. The number of operations is proportional to 2^cost.
 The current default value is 6.
+
+Optional parameter C<strong> define random data sources type for salt: weak (0)
+or strong (1) random source. Default value is 0.
 
 =head1 HELPERS
 
