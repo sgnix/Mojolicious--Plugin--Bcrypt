@@ -15,14 +15,14 @@ plugin bcrypt => { cost => 6 };
 get '/bc' => sub {
     my $self = shift;
     my ( $p, $s ) = map { $self->param($_) } qw/p s/;
-    $self->render_text( $self->bcrypt( $p, $s ) );
+    $self->render( text => $self->bcrypt( $p, $s ) );
 };
 
 get '/bv' => sub {
     my $self = shift;
     my ( $p, $c ) = map { $self->param($_) } qw/p c/;
     my $ok = $self->bcrypt_validate( $p, $c );
-    $self->render_text( $ok ? 'Pass' : 'Fail' );
+    $self->render( text => ($ok ? 'Pass' : 'Fail') );
 };
 
 my $t = Test::Mojo->new();
