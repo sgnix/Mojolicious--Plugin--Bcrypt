@@ -3,7 +3,7 @@ package Mojolicious::Plugin::Bcrypt;
 use warnings;
 use strict;
 
-our $VERSION = '0.04';
+our $VERSION = '0.14';
 
 use Mojo::Base 'Mojolicious::Plugin';
 use Crypt::Eksblowfish::Bcrypt qw(bcrypt en_base64);
@@ -116,11 +116,9 @@ L<Crypt::Eksblowfish::Bcrypt>, L<Mojolicious>, L<Mojolicious::Plugin>
 
 =head1 AUTHOR
 
-minimalist, C<< <minimalist at lavabit.com> >>
+Stefan G., C<< <minimal at cpan.org> >>
 
 =head1 LICENSE AND COPYRIGHT
-
-Copyright 2011 minimalist.
 
 This program is free software; you can redistribute it and/or modify it
 under the terms of either: the GNU General Public License as published
