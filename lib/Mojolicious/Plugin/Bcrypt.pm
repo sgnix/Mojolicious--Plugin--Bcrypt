@@ -6,6 +6,7 @@ use strict;
 our $VERSION = '0.14';
 
 use Mojo::Base 'Mojolicious::Plugin';
+use Mojo::Util qw(secure_compare);
 use Crypt::Eksblowfish::Bcrypt qw(bcrypt en_base64);
 
 sub register {
@@ -29,7 +30,7 @@ sub register {
         bcrypt_validate => sub {
             my $c = shift;
             my ( $plain, $crypted ) = @_;
-            return $c->bcrypt( $plain, $crypted ) eq $crypted;
+            return secure_compare $c->bcrypt( $plain, $crypted ), $crypted;
         }
     );
 }
