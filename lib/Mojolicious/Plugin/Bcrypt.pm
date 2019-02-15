@@ -6,7 +6,9 @@ use strict;
 our $VERSION = '0.14';
 
 use Mojo::Base 'Mojolicious::Plugin';
+use Mojo::Util qw(secure_compare);
 use Crypt::Eksblowfish::Bcrypt qw(bcrypt en_base64);
+use Crypt::URandom qw(urandom);
 
 sub register {
     my $self   = shift;
@@ -29,16 +31,12 @@ sub register {
         bcrypt_validate => sub {
             my $c = shift;
             my ( $plain, $crypted ) = @_;
-            return $c->bcrypt( $plain, $crypted ) eq $crypted;
+            return secure_compare $c->bcrypt( $plain, $crypted ), $crypted;
         }
     );
 }
 
-sub _salt {
-    my $num = 999999;
-    my $cr = crypt( rand($num), rand($num) ) . crypt( rand($num), rand($num) );
-    en_base64(substr( $cr, 4, 16 ));
-}
+sub _salt { en_base64(urandom(16)) }
 
 1;
 
